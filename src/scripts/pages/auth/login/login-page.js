@@ -33,7 +33,7 @@ export default class LoginPage {
       e.preventDefault();
       const email = e.target.email.value;
       const password = e.target.password.value;
-      
+
       await this.presenter.handleLogin({ email, password });
     });
   }

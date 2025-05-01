@@ -53,18 +53,18 @@ export async function getStories(token) {
     const url = new URL(`${ENDPOINTS.STORIES}`);
 
     const response = await fetch(url, {
-      headers: { 
+      headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     });
 
     if (!response.ok) {
       const errorData = await response.json();
       return {
         error: true,
-        message: errorData.message || 'Network error',
-        listStory: []
+        message: errorData.message || "Network error",
+        listStory: [],
       };
     }
 
@@ -72,15 +72,14 @@ export async function getStories(token) {
     return {
       error: false,
       listStory: data.listStory || [],
-      message: data.message || 'Success'
+      message: data.message || "Success",
     };
-
   } catch (error) {
-    console.error('Fetch error:', error);
+    console.error("Fetch error:", error);
     return {
       error: true,
-      message: error.message || 'Network error',
-      listStory: []
+      message: error.message || "Network error",
+      listStory: [],
     };
   }
 }
@@ -89,23 +88,23 @@ export async function getStories(token) {
 export async function addStory(formData, token) {
   try {
     const response = await fetch(`${ENDPOINTS.STORIES}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
-      body: formData
+      body: formData,
     });
 
     const data = await response.json();
-    
+
     return {
       error: !response.ok,
-      message: data.message || (response.ok ? 'Success' : 'Failed')
+      message: data.message || (response.ok ? "Success" : "Failed"),
     };
   } catch (error) {
     return {
       error: true,
-      message: error.message
+      message: error.message,
     };
   }
 }

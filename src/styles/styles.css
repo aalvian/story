@@ -44,7 +44,6 @@ header {
   gap: 30px;
 }
 
-
 /* API Trasition */
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -61,15 +60,22 @@ header {
 }
 
 @keyframes fade-in {
-  from { opacity: 0.8; }
-  to { opacity: 1; }
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fade-out {
-  from { opacity: 1; }
-  to { opacity: 0.8; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.8;
+  }
 }
-
 
 /* ICON NAVBAR*/
 .drawer-button {
@@ -128,10 +134,10 @@ header {
 }
 
 .nav-list li a {
-  padding: 8px 12px; 
+  padding: 8px 12px;
   display: flex;
   align-items: center;
-  gap: 8px; 
+  gap: 8px;
   color: #101041;
   text-decoration: none;
   border-radius: 10px;
@@ -142,7 +148,7 @@ header {
 #home-button:hover,
 #login-button:hover,
 #register-button:hover {
-  background-color: #e0e8ff; 
+  background-color: #e0e8ff;
   box-shadow: 0 2px 4px rgba(16, 16, 65, 0.1);
 }
 
@@ -155,7 +161,7 @@ header {
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background-color: #b30000; 
+  background-color: #b30000;
   color: white;
   border: none;
   border-radius: 10px;
@@ -165,7 +171,7 @@ header {
 }
 
 #logout-button:hover {
-  background-color: #d32f2f; 
+  background-color: #d32f2f;
   box-shadow: 0 2px 4px rgba(16, 16, 65, 0.1);
 }
 
@@ -190,7 +196,6 @@ header {
 .skip-to-content:focus {
   transform: translateY(0%);
 }
-
 
 /* FOOTER */
 .footer {
@@ -221,7 +226,6 @@ header {
 .copyright {
   text-align: center;
 }
-
 
 /* LOGIN */
 .form-page {
@@ -264,15 +268,15 @@ header {
 }
 
 .error-message {
-  background-color: #ffebee; 
-  color: #d32f2f;          
-  border: 1px solid #ef9a9a; 
-  border-radius: 4px;      
-  padding: 12px;      
-  margin-bottom: 10px;     
+  background-color: #ffebee;
+  color: #d32f2f;
+  border: 1px solid #ef9a9a;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 10px;
   font-size: 14px;
-  display: flex;           
-  gap: 8px;               
+  display: flex;
+  gap: 8px;
 }
 
 /* MAIN */
@@ -329,12 +333,11 @@ header {
   font-size: 0.8rem;
 }
 
-
 /* Map Container */
 #map-container {
   border-radius: 8px;
   border: 1px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
 
@@ -363,8 +366,12 @@ header {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* ADD */
@@ -374,7 +381,7 @@ header {
   margin: 0 auto;
   background: #fff;
   border-radius: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .add-story form {
@@ -412,14 +419,22 @@ header {
   background-color: #0f6edc;
 }
 
+.input-image {
+  padding: 10px;
+  background-color: #1e90ff;
+  color: white;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
 .camera-buttons {
   display: flex;
-  justify-content: center; 
-  gap: 10px; 
+  justify-content: center;
+  gap: 10px;
 }
 
 .camera-buttons button {
-  width: 50%; 
+  width: 50%;
   max-width: 100%;
 }
 
@@ -437,7 +452,6 @@ header {
   border-radius: 0.5rem;
   border: 1px solid #ccc;
 }
-
 
 /* Write your styles more here */
 

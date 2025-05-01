@@ -18,12 +18,22 @@ class AddPresenter {
     this.photoResult = document.getElementById("photo-result");
     const fileInput = document.getElementById("file-input");
 
-    fileInput.addEventListener("change", (event) => this.handleFileInput(event));
+    fileInput.addEventListener("change", (event) =>
+      this.handleFileInput(event),
+    );
 
-    document.getElementById("open-camera").addEventListener("click", () => this.openCamera());
-    document.getElementById("close-camera").addEventListener("click", () => this.closeCamera());
-    document.getElementById("take-photo").addEventListener("click", () => this.takePhoto());
-    document.getElementById("add-story-form").addEventListener("submit", (e) => this.submitForm(e));
+    document
+      .getElementById("open-camera")
+      .addEventListener("click", () => this.openCamera());
+    document
+      .getElementById("close-camera")
+      .addEventListener("click", () => this.closeCamera());
+    document
+      .getElementById("take-photo")
+      .addEventListener("click", () => this.takePhoto());
+    document
+      .getElementById("add-story-form")
+      .addEventListener("submit", (e) => this.submitForm(e));
 
     this.initMap();
   }
@@ -33,7 +43,7 @@ class AddPresenter {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.photoResult.src = e.target.result; 
+        this.photoResult.src = e.target.result;
         this.photoResult.style.display = "block";
       };
       reader.readAsDataURL(file);
@@ -54,11 +64,11 @@ class AddPresenter {
 
   closeCamera() {
     if (this.stream) {
-      this.stream.getTracks().forEach(track => track.stop()); 
+      this.stream.getTracks().forEach((track) => track.stop());
       this.stream = null;
     }
-    this.video.style.display = "none"; 
-    document.getElementById("take-photo").style.display = "none"; 
+    this.video.style.display = "none";
+    document.getElementById("take-photo").style.display = "none";
   }
 
   takePhoto() {
@@ -72,19 +82,21 @@ class AddPresenter {
     photoResult.style.display = "block";
 
     if (this.stream) {
-      this.stream.getTracks().forEach(track => track.stop());
+      this.stream.getTracks().forEach((track) => track.stop());
       this.video.style.display = "none";
       document.getElementById("take-photo").style.display = "none";
     }
   }
 
   initMap() {
-    document.getElementById("use-my-location").addEventListener("click", () => this.useMyLocation());
+    document
+      .getElementById("use-my-location")
+      .addEventListener("click", () => this.useMyLocation());
 
-    this.map = L.map("map").setView([-7.797068, 110.370529], 13); 
+    this.map = L.map("map").setView([-7.797068, 110.370529], 13);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; OpenStreetMap contributors'
+      attribution: "&copy; OpenStreetMap contributors",
     }).addTo(this.map);
 
     const marker = L.marker([0, 0], { draggable: true }).addTo(this.map);
@@ -104,22 +116,22 @@ class AddPresenter {
       alert("Geolocation tidak didukung browser ini.");
       return;
     }
-  
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
         this.lat = latitude;
         this.lon = longitude;
-  
+
         document.getElementById("lat").value = latitude;
         document.getElementById("lon").value = longitude;
-  
+
         const marker = L.marker([latitude, longitude]).addTo(this.map);
         this.map.setView([latitude, longitude], 15);
       },
       (error) => {
         alert("Gagal mendapatkan lokasi: " + error.message);
-      }
+      },
     );
   }
 

@@ -25,7 +25,7 @@ class AddPage {
           <img id="photo-result" src="" alt="Hasil Foto" style="display:none; width:100%; max-width:300px;" />
 
           <label for="file-input">Pilih Gambar</label>
-          <input type="file" id="file-input" accept="image/*" />
+          <input type="file" id="file-input" class="input-image" accept="image/*" />
 
           <label>Lokasi</label>
           <div id="map" style="height: 300px;"></div>

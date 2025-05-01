@@ -30,7 +30,7 @@ class HomePage {
   }
 
   initMap() {
-    this.storyMap = new StoryMap('map-container');
+    this.storyMap = new StoryMap("map-container");
     this._map = this.storyMap.getMapInstance();
     this._markers = [];
   }
@@ -40,28 +40,32 @@ class HomePage {
     container.innerHTML = stories
       .map(
         (story) => `
-      <div class="story" data-id="${story.id}" data-lat="${story.lat || ''}" data-lon="${story.lon || ''}">
+      <div class="story" data-id="${story.id}" data-lat="${story.lat || ""}" data-lon="${story.lon || ""}">
         <img src="${story.photoUrl}" alt="${story.description}">
         <p>${story.name}</p>
         <p>${story.description}</p>
-        ${story.lat && story.lon ? `
+        ${
+          story.lat && story.lon
+            ? `
           <small class="location">
             <i class="fas fa-map-marker-alt"></i> Lokasi
             ${story.lat.toFixed(4)}, ${story.lon.toFixed(4)}
           </small>
-        ` : ''}
-        <small>Dibuat Pada: ${new Date(story.createdAt).toLocaleString('id-ID')}</small>
+        `
+            : ""
+        }
+        <small>Dibuat Pada: ${new Date(story.createdAt).toLocaleString("id-ID")}</small>
       </div>
     `,
       )
       .join("");
-    
+
     this.addStoryMarkers(stories);
   }
 
   addStoryMarkers(stories) {
     this.storyMap.addMarkers(stories);
-    this._markers = this.storyMap.markers; 
+    this._markers = this.storyMap.markers;
   }
 
   showLoading() {
