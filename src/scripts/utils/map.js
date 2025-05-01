@@ -39,7 +39,7 @@ class StoryMap {
   
     stories.filter(story => story.lat && story.lon).forEach(story => {
       const marker = L.marker([story.lat, story.lon]).addTo(this.map);
-      marker.bindPopup(`<b>${story.name}</b>`);
+      marker.bindPopup(`<b>${story.name}</b>`).openPopup();;
       this.markers.push(marker);
     });
   }

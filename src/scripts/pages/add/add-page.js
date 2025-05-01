@@ -14,7 +14,7 @@ class AddPage {
           <label for="description">Deskripsi</label>
           <textarea id="description" required></textarea>
 
-          <label>Gambar</label>
+          <label for="open-camera">Gambar</label>
           <div class="camera-buttons">
             <button type="button" id="open-camera">Buka Kamera</button>
             <button type="button" id="close-camera">Tutup Kamera</button>

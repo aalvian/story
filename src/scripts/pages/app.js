@@ -93,8 +93,16 @@ class App {
         return;
       }
 
-      this.#content.innerHTML = await route.page.render();
-      await route.page.afterRender();
+      if (document.startViewTransition) {
+        await document.startViewTransition(async () => {
+          this.#content.innerHTML = await route.page.render();
+          await route.page.afterRender();
+        });
+      } else {
+        // Fallback biasa
+        this.#content.innerHTML = await route.page.render();
+        await route.page.afterRender();
+      }
     } catch (error) {
       console.error("Render error:", error);
       window.location.hash = "#";
