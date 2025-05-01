@@ -15,10 +15,8 @@ class HomePage {
         <p>Memuat data...</p>
       </div>
 
+      <h1>Daftar Cerita</h1>
       <section class="home">
-        <div class="home-story">
-          <h1>Daftar Cerita</h1>
-        </div>
         <div id="story-list"></div>
         <div id="map-container" style="height: 400px; margin-top: 60px;"></div>
       </section>

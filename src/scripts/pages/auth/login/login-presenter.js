@@ -6,12 +6,12 @@ class LoginPresenter {
   }
 
   async handleLogin({ email, password }) {
-    try {
-      if (password.length < 8) {
-        this._view.showError("Password minimal 8 karakter");
-        return;
-      }
-      
+    if (password.length < 8) {
+      this._view.showError("Password minimal 8 karakter");
+      return;
+    }
+
+    try {  
       const { error, loginResult } = await login({ email, password });
 
       if (error) {

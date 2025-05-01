@@ -14,8 +14,11 @@ body {
 }
 
 h1 {
-  color: #101041;
   text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  padding-block: 10px;
+  color: #101041;
 }
 
 .container {
@@ -125,7 +128,7 @@ header {
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background-color: #f44336; 
+  background-color: #b30000; 
   color: white;
   border: none;
   border-radius: 10px;
@@ -254,14 +257,6 @@ header {
 .home {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-}
-
-.home-story h1 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #2d3e50;
-  font-size: 2rem;
 }
 
 #story-list {
@@ -307,6 +302,116 @@ header {
   font-size: 0.8rem;
 }
 
+
+/* Map Container */
+#map-container {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+/* LOADING */
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ADD */
+.add-story {
+  padding: 2rem;
+  max-width: 100vh;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.add-story form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.add-story label {
+  font-weight: 600;
+  color: #444;
+}
+
+.add-story textarea {
+  min-height: 100px;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  resize: vertical;
+  font-size: 1rem;
+}
+
+.add-story button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #1e90ff;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-story button:hover {
+  background-color: #0f6edc;
+}
+
+.camera-buttons {
+  display: flex;
+  justify-content: center; 
+  gap: 10px; 
+}
+
+.camera-buttons button {
+  width: 50%; 
+  max-width: 100%;
+}
+
+#camera-preview,
+#photo-result {
+  border-radius: 0.5rem;
+  border: 1px solid #ddd;
+  margin-top: 0.5rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#map {
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+
 /* Write your styles more here */
 
 @media screen and (width > 1000px) {
@@ -347,65 +452,4 @@ header {
   #story-list {
     grid-template-columns: 1fr;
   }
-}
-
-
-/* LOADING */
-.loading {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-.spinner {
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #3498db;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-
-
-/* Map Container */
-#map-container {
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin-bottom: 20px;
-}
-
-/* Story Card Highlight */
-.story.highlight {
-  border: 2px solid #3498db;
-  transition: border 0.3s ease;
-}
-
-/* Location Indicator */
-.location {
-  color: #3498db;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-/* Popup Style */
-.leaflet-popup-content img {
-  max-width: 150px;
-  max-height: 150px;
-  margin-bottom: 8px;
 }
