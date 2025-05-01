@@ -1,33 +1,39 @@
-export default class HomePage {
+import HomePresenter from "./home-presenter";
+
+class HomePage {
   async render() {
     return `
-      <section class="container">
-        <h1>Home Page</h1>
+      <section class="home">
+        <div class="home-story">
+          <h1>Daftar Cerita</h1>
+        </div>
+
+        <div id="story-list"></div>
+
       </section>
     `;
   }
 
+  _renderStories(stories) {
+    const container = document.getElementById("story-list");
+    container.innerHTML = stories
+      .map(
+        (story) => `
+      <div class="story">
+        <img src="${story.photoUrl}" alt="${story.description}">
+        <p>${story.name}</p>
+        <p>${story.description}</p>
+        <small>Dibuat Pada: ${new Date(story.createdAt).toLocaleString()}</small>
+      </div>
+    `,
+      )
+      .join("");
+  }
+
   async afterRender() {
-    const token = localStorage.getItem('story_token');
+    const presenter = new HomePresenter(this);
+    await presenter.showStories();
   }
 }
 
-// const HomePage = {
-//   async render() {
-//     return `
-//       <section class="story-list">
-//         <h2>Daftar Cerita</h2>
-//         <div id="storyList" class="story-container">Loading...</div>
-//       </section>
-//     `;
-//   },
-
-//   async afterRender() {
-//     const HomePresenter = await import('./home-presenter.js');
-//     HomePresenter.default.init();
-//   },
-// };
-
-// export default HomePage;
-
-
+export default HomePage;

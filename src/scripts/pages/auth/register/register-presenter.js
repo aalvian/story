@@ -1,4 +1,4 @@
-import { register } from '../../../data/story-api';
+import { register } from "../../../data/story-api";
 
 export default class RegisterPresenter {
   constructor({ view }) {
@@ -8,7 +8,8 @@ export default class RegisterPresenter {
   async handleRegister(name, email, password) {
     try {
       await register({ name, email, password });
-      window.location.hash = '/login';
+      
+      window.location.hash = "/login";
     } catch (error) {
       this.view.showError(error.message);
     }

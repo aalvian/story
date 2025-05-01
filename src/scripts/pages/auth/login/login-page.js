@@ -1,13 +1,21 @@
-import LoginPresenter from './login-presenter';
+import LoginPresenter from "./login-presenter";
 
 export default class LoginPage {
+  constructor() {
+    this._showError = this.showError.bind(this);
+    this.presenter = new LoginPresenter({
+      showError: this._showError,
+    });
+  }
+
   async render() {
     return `
       <section class="form-page">
-        <p id="loginError" style="color: red;" aria-live="assertive"></p>
-        <form id="loginForm" class="form-card">
-          <label for="email">Username</label>
-          <input id="email" name="email" type="text" placeholder="Contoh: John Doe" required />
+      <div id="loginError" class="error-message" style="display:none"></div>
+        <form id="login-form" class="form-card">
+          <h1>Login</h1>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="text" placeholder="you@example.com" required />
 
           <label for="password">Password</label>
           <input id="password" name="password" type="password" placeholder="********" required />
@@ -20,22 +28,23 @@ export default class LoginPage {
   }
 
   async afterRender() {
-    this.presenter = new LoginPresenter({ view: this });
-
-    const form = document.getElementById('loginForm');
-    form.addEventListener('submit', async (e) => {
+    const form = document.getElementById("login-form");
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const email = form.email.value;
-      const password = form.password.value;
-
-      this.presenter.handleLogin(email, password);
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+      await this.presenter.handleLogin({ email, password });
     });
   }
 
   showError(message) {
-    const errorElem = document.getElementById('loginError');
-    errorElem.textContent = message;
+    const errorElement = document.getElementById("loginError");
+    if (errorElement) {
+      errorElement.textContent = message;
+      errorElement.style.display = "block";
+      setTimeout(() => {
+        errorElement.style.display = "none";
+      }, 5000);
+    }
   }
-};
-
-// export default LoginPage;
+}

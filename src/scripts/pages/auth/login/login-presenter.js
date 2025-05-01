@@ -1,17 +1,36 @@
-import { login } from '../../../data/story-api';
+import { login } from "../../../data/story-api";
 
-export default class LoginPresenter {
-  constructor({ view }) {
-    this.view = view;
+class LoginPresenter {
+  constructor(view) {
+    this._view = view;
   }
 
-  async handleLogin(email, password) {
+  async handleLogin({ email, password }) {
     try {
-      const data = await login({ email, password });
-      localStorage.setItem('story_token', data.loginResult.token);
-      window.location.hash = '/';
+      const { error, loginResult } = await login({ email, password });
+
+      if (password.length < 8) {
+        throw new Error("Password minimal 8 karakter");
+      }
+
+      if (error) {
+        this._view.showError("Email atau password salah");
+        return;
+      }
+
+      localStorage.setItem("token", loginResult.token);
+
+      window.dispatchEvent(
+        new CustomEvent("auth-change", {
+          detail: { isLoggedIn: true },
+        }),
+      );
+
+      window.location.hash = "#/";
     } catch (error) {
-      this.view.showError(error.message);
+      this._view.showError(error.message);
     }
   }
 }
+
+export default LoginPresenter;

@@ -1,19 +1,19 @@
-import RegisterPresenter from './register-presenter';
+import RegisterPresenter from "./register-presenter";
 
 export default class RegisterPage {
   async render() {
     return `
       <section class="form-page">
-        <p id="registerError" style="color: red;" aria-live="assertive"></p>
         <form id="registerForm" class="form-card">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" placeholder="Contoh: John Doe" required />
+          <h1>Register</h1>
+          <label for="name">Nama</label>
+          <input id="name" name="name" type="text" placeholder="John Doe" required />
 
           <label for="email">Email</label>
           <input id="email" name="email" type="email" placeholder="you@example.com" required />
           
           <label for="password">Password</label>
-          <input id="password" name="password" type="password" placeholder="********" required />
+          <input id="password" name="password" type="password" placeholder="********" required minlength=8 />
           
           <button type="submit">Register</button>
           <p>Sudah punya akun? <a href="#/login">Login</a></p>
@@ -25,8 +25,8 @@ export default class RegisterPage {
   async afterRender() {
     this.presenter = new RegisterPresenter({ view: this });
 
-    const form = document.getElementById('registerForm');
-    form.addEventListener('submit', (e) => {
+    const form = document.getElementById("registerForm");
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
       const name = form.name.value;
       const email = form.email.value;
@@ -35,11 +35,4 @@ export default class RegisterPage {
       this.presenter.handleRegister(name, email, password);
     });
   }
-
-  showError(message) {
-    const errorElem = document.getElementById('registerError');
-    errorElem.textContent = message;
-  }
-};
-
-// export default RegisterPage;
+}
