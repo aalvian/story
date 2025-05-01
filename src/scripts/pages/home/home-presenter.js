@@ -8,7 +8,7 @@ class HomePresenter {
   async showStories() {
     const token = localStorage.getItem("token");
     if (!token) {
-      window.location.hash = "#login";
+      window.location.hash = "#/login";
       return;
     }
 
@@ -16,7 +16,7 @@ class HomePresenter {
     if (error) {
       alert("Gagal ambil data!");
     } else {
-      this._view._renderStories(listStory);
+      this._view.renderStories(listStory);
     }
   }
 }

@@ -14,7 +14,7 @@ class HomePage {
     `;
   }
 
-  _renderStories(stories) {
+  renderStories(stories) {
     const container = document.getElementById("story-list");
     container.innerHTML = stories
       .map(
@@ -23,7 +23,7 @@ class HomePage {
         <img src="${story.photoUrl}" alt="${story.description}">
         <p>${story.name}</p>
         <p>${story.description}</p>
-        <small>Dibuat Pada: ${new Date(story.createdAt).toLocaleString()}</small>
+        <small>Dibuat Pada: ${new Date(story.createdAt).toLocaleString('id-ID')}</small>
       </div>
     `,
       )
