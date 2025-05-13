@@ -3,8 +3,8 @@ import L from "leaflet";
 class StoryMap {
   constructor(containerId) {
     this.map = L.map(containerId, {
-      center: [-6.9025, 107.6186],
-      zoom: 7,
+      center: [-6.2025, 106.6186],
+      zoom: 5,
       scrollWheelZoom: true,
     });
 

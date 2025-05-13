@@ -6,14 +6,12 @@ class LoginPresenter {
   }
 
   async handleLogin({ email, password }) {
-    this._view.showLoading();
-
     if (password.length < 8) {
       this._view.showError("Password minimal 8 karakter");
       return;
     }
 
-    try {
+    try {  
       const { error, loginResult } = await login({ email, password });
 
       if (error) {
@@ -28,10 +26,9 @@ class LoginPresenter {
         }),
       );
       window.location.hash = "#/";
+
     } catch (error) {
       this._view.showError(error.message);
-    } finally {
-      this._view.hideLoading();
     }
   }
 }

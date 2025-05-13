@@ -2,7 +2,6 @@
 import "../styles/styles.css";
 
 import App from "./pages/app";
-import { registerServiceWorker } from './utils';
 
 document.addEventListener("DOMContentLoaded", async () => {
   const app = new App({
@@ -12,11 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   await app.renderPage();
 
-  await registerServiceWorker();
-
   window.addEventListener("hashchange", async () => {
     await app.renderPage();
   });
 });
-
-

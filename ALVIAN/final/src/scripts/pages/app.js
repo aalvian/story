@@ -1,11 +1,10 @@
 import routes from "../routes/routes";
 import { getActiveRoute } from "../routes/url-parser";
+
 import {
   generateAuthenticatedNavigationListTemplate,
   generateUnauthenticatedNavigationListTemplate,
 } from "../templates";
-import { isServiceWorkerAvailable } from '../utils';
-import { subscribe, unsubscribe, checkSubscriptionStatus } from '../utils/notification-helper';
 
 class App {
   #content = null;
@@ -19,12 +18,6 @@ class App {
 
     this._setupDrawer();
     this._initAuthState();
-
-    if (isServiceWorkerAvailable()) {
-    import('../utils').then(({ registerServiceWorker }) => {
-      registerServiceWorker();
-    });
-  }
   }
 
   _setupDrawer() {
@@ -56,7 +49,7 @@ class App {
     });
   }
 
-  async #setupNavigationList() {
+  #setupNavigationList() {
     const isLoggedIn = !!localStorage.getItem("token");
     const navListMain = document.getElementById("navlist-main");
     const navList = document.getElementById("navlist");
@@ -72,24 +65,6 @@ class App {
         e.preventDefault();
         this._handleLogout();
       });
-
-      // Handle subscribe - langsung di sini
-      const token = localStorage.getItem("token");
-      const isSubscribed = await checkSubscriptionStatus();
-      
-      document.getElementById('push-notification-tools').innerHTML = 
-        generateSubscribeButtonTemplate(isSubscribed);
-        
-      document.getElementById(isSubscribed ? 'unsubscribe-button' : 'subscribe-button')
-        ?.addEventListener("click", async () => {
-          const success = isSubscribed 
-            ? await unsubscribe(token)
-            : await subscribe(token);
-            
-          if (success) {
-            this.#setupNavigationList(); // Refresh UI
-          }
-        });
     }
   }
 
@@ -118,16 +93,8 @@ class App {
         return;
       }
 
-      if (document.startViewTransition) {
-        await document.startViewTransition(async () => {
-          this.#content.innerHTML = await route.page.render();
-          await route.page.afterRender();
-        });
-      } else {
-        // Fallback biasa
-        this.#content.innerHTML = await route.page.render();
-        await route.page.afterRender();
-      }
+      this.#content.innerHTML = await route.page.render();
+      await route.page.afterRender();
     } catch (error) {
       console.error("Render error:", error);
       window.location.hash = "#";

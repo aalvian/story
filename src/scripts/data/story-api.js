@@ -1,9 +1,11 @@
-import CONFIG from "../config";
+import CONFIG, { VAPID_PUBLIC_KEY } from "../config";
 
 const ENDPOINTS = {
   REGISTER: `${CONFIG.BASE_URL}/register`,
   LOGIN: `${CONFIG.BASE_URL}/login`,
   STORIES: `${CONFIG.BASE_URL}/stories`,
+
+  SUBSCRIBE: `${CONFIG.BASE_URL}/notifications/subscribe`,
 };
 
 // == Register == //
@@ -105,6 +107,71 @@ export async function addStory(formData, token) {
     return {
       error: true,
       message: error.message,
+    };
+  }
+}
+
+// == Notif == //
+export async function subscribePushNotification(subscription, token) {
+  try {
+    const response = await fetch(ENDPOINTS.SUBSCRIBE, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(subscription),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return {
+        error: true,
+        message: data.message || "Gagal melakukan subscribe",
+      };
+    }
+
+    return {
+      error: false,
+      data: data.data,
+    };
+  } catch (error) {
+    return {
+      error: true,
+      message: error.message || "Terjadi kesalahan jaringan",
+    };
+  }
+}
+
+export async function unsubscribePushNotification(endpoint, token) {
+  try {
+    const response = await fetch(ENDPOINTS.SUBSCRIBE, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ endpoint }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return {
+        error: true,
+        message: data.message || "Gagal melakukan unsubscribe",
+      };
+    }
+
+    return {
+      error: false,
+      data: data.data,
+    };
+  } catch (error) {
+    return {
+      error: true,
+      message: error.message || "Terjadi kesalahan jaringan",
     };
   }
 }

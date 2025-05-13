@@ -2,24 +2,14 @@ import LoginPresenter from "./login-presenter";
 
 export default class LoginPage {
   constructor() {
-  this._showError = this.showError.bind(this);
-  this._showLoading = this.showLoading.bind(this);
-  this._hideLoading = this.hideLoading.bind(this);
-  
-  this.presenter = new LoginPresenter({
-    showError: this._showError,
-    showLoading: this._showLoading,
-    hideLoading: this._hideLoading,
-  });
+    this._showError = this.showError.bind(this);
+    this.presenter = new LoginPresenter({
+      showError: this._showError,
+    });
   }
 
   async render() {
     return `
-      <div id="loading" class="loading" style="display:none;">
-        <div class="spinner"></div>
-        <p>Memuat data...</p>
-      </div>
-
       <section class="form-page">
       <div id="loginError" class="error-message" style="display:none"></div>
         <form id="login-form" class="form-card">
@@ -43,7 +33,7 @@ export default class LoginPage {
       e.preventDefault();
       const email = e.target.email.value;
       const password = e.target.password.value;
-
+      
       await this.presenter.handleLogin({ email, password });
     });
   }
@@ -57,13 +47,5 @@ export default class LoginPage {
         errorElement.style.display = "none";
       }, 5000);
     }
-  }
-
-  showLoading() {
-    document.getElementById("loading").style.display = "flex";
-  }
-
-  hideLoading() {
-    document.getElementById("loading").style.display = "none";
   }
 }
