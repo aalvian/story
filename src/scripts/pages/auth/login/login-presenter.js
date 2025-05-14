@@ -9,9 +9,11 @@ class LoginPresenter {
     this._view.showLoading();
 
     if (password.length < 8) {
+      this._view.hideLoading();
       this._view.showError("Password minimal 8 karakter");
       return;
     }
+
 
     try {
       const { error, loginResult } = await login({ email, password });
