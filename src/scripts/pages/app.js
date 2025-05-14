@@ -3,9 +3,13 @@ import { getActiveRoute } from "../routes/url-parser";
 import {
   generateAuthenticatedNavigationListTemplate,
   generateUnauthenticatedNavigationListTemplate,
+  generateSubscribeButtonTemplate,
 } from "../templates";
-import { isServiceWorkerAvailable } from '../utils';
-import { subscribe, unsubscribe, checkSubscriptionStatus } from '../utils/notification-helper';
+import {
+  subscribe,
+  unsubscribe,
+  checkSubscriptionStatus,
+} from "../utils/notification-helper";
 
 class App {
   #content = null;
@@ -19,12 +23,6 @@ class App {
 
     this._setupDrawer();
     this._initAuthState();
-
-    if (isServiceWorkerAvailable()) {
-    import('../utils').then(({ registerServiceWorker }) => {
-      registerServiceWorker();
-    });
-  }
   }
 
   _setupDrawer() {
@@ -73,21 +71,24 @@ class App {
         this._handleLogout();
       });
 
-      // Handle subscribe - langsung di sini
+      // Handle subscribe/unsubscribe button
       const token = localStorage.getItem("token");
       const isSubscribed = await checkSubscriptionStatus();
-      
-      document.getElementById('push-notification-tools').innerHTML = 
+
+      document.getElementById("push-notification-tools").innerHTML =
         generateSubscribeButtonTemplate(isSubscribed);
-        
-      document.getElementById(isSubscribed ? 'unsubscribe-button' : 'subscribe-button')
+
+      document
+        .getElementById(
+          isSubscribed ? "unsubscribe-button" : "subscribe-button",
+        )
         ?.addEventListener("click", async () => {
-          const success = isSubscribed 
+          const success = isSubscribed
             ? await unsubscribe(token)
             : await subscribe(token);
-            
+
           if (success) {
-            this.#setupNavigationList(); // Refresh UI
+            this.#setupNavigationList();
           }
         });
     }
@@ -124,7 +125,6 @@ class App {
           await route.page.afterRender();
         });
       } else {
-        // Fallback biasa
         this.#content.innerHTML = await route.page.render();
         await route.page.afterRender();
       }

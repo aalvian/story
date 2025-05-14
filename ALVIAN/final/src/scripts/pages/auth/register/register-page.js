@@ -37,7 +37,7 @@ export default class RegisterPage {
       const data = {
         name: e.target.name.value,
         email: e.target.email.value,
-        password: e.target.password.value
+        password: e.target.password.value,
       };
       this.presenter.handleRegister(data);
     });

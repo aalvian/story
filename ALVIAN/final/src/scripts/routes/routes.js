@@ -6,7 +6,7 @@ import RegisterPage from "../pages/auth/register/register-page";
 const routes = {
   "/": {
     page: new HomePage(),
-    requiresAuth: true, 
+    requiresAuth: true,
   },
   "/add": {
     page: new AddPage(),

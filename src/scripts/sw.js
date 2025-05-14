@@ -1,34 +1,23 @@
-// self.addEventListener('push', (event) => {
-//   console.log('Service worker pushing...');
- 
-//   async function chainPromise() {
-//     await self.registration.showNotification('Ada catatan baru untuk Anda!', {
-//       body: 'Semangat untuk belajar!',
-//     });
-//   }
- 
-//   event.waitUntil(chainPromise());
-// });
+self.addEventListener("push", (event) => {
+  let data = {};
 
-self.addEventListener('push', (event) => {
-  const payload = event.data?.json() || {
-    title: 'Story Notification',
-    options: {
-      body: 'Anda memiliki notifikasi baru'
+  if (event.data) {
+    try {
+      data = event.data.json();
+    } catch (e) {
+      data = {
+        title: "Notifikasi",
+        options: {
+          body: event.data.text(),
+        },
+      };
     }
+  }
+
+  const title = data.title || "Story berhasil dibuat";
+  const options = {
+    body: data.options?.body || "Anda telah membuat story baru.",
   };
 
-  event.waitUntil(
-    self.registration.showNotification(
-      payload.title,
-      payload.options
-    )
-  );
-});
-
-self.addEventListener('notificationclick', (event) => {
-  event.notification.close();
-  event.waitUntil(
-    clients.openWindow(event.notification.data?.url || '/')
-  );
+  event.waitUntil(self.registration.showNotification(title, options));
 });

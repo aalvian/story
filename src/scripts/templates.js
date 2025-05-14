@@ -1,3 +1,17 @@
+export function generateSubscribeButtonTemplate(isSubscribed = false) {
+  return isSubscribed
+    ? `
+      <button id="unsubscribe-button" class="unsubscribe-button">
+        <i class="fas fa-bell-slash"></i> Unsubscribe
+      </button>
+    `
+    : `
+      <button id="subscribe-button" class="subscribe-button">
+        <i class="fas fa-bell"></i> Subscribe
+      </button>
+    `;
+}
+
 export function generateAuthenticatedNavigationListTemplate() {
   return `
       <li>
@@ -10,14 +24,9 @@ export function generateAuthenticatedNavigationListTemplate() {
           <i class="fas fa-bookmark"></i> Simpan Cerita
         </a>
       </li>
-      <li>
-        <a href="#/" id="subscribe-button">
-          <i class="fas fa-bell"></i> Subscribe
-        </a>
-      </li>
-      <li id="push-notification-tools">
-        ${generateSubscribeButtonTemplate()}
-      </li>
+
+      <li id="push-notification-tools"></li>
+      
       <li>
         <button id="logout-button">
           <i class="fas fa-sign-out-alt"></i>Logout
@@ -32,19 +41,3 @@ export function generateUnauthenticatedNavigationListTemplate() {
       <li><a href="#/register" id="register-button">Register</a></li>
     `;
 }
-
-
-export function generateSubscribeButtonTemplate(isSubscribed = false) {
-  return isSubscribed
-    ? `
-      <button id="unsubscribe-button" class="btn unsubscribe-button">
-        Unsubscribe <i class="fas fa-bell-slash"></i>
-      </button>
-    `
-    : `
-      <button id="subscribe-button" class="btn subscribe-button">
-        Subscribe <i class="fas fa-bell"></i>
-      </button>
-    `;
-}
-

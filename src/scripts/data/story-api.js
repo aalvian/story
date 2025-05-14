@@ -1,4 +1,4 @@
-import CONFIG, { VAPID_PUBLIC_KEY } from "../config";
+import CONFIG from "../config";
 
 const ENDPOINTS = {
   REGISTER: `${CONFIG.BASE_URL}/register`,
@@ -113,35 +113,26 @@ export async function addStory(formData, token) {
 
 // == Notif == //
 export async function subscribePushNotification(subscription, token) {
-  try {
-    const response = await fetch(ENDPOINTS.SUBSCRIBE, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(subscription),
-    });
+  const subscriptionJson = subscription.toJSON();
 
-    const data = await response.json();
+  const payload = {
+    endpoint: subscriptionJson.endpoint,
+    keys: {
+      p256dh: subscriptionJson.keys.p256dh,
+      auth: subscriptionJson.keys.auth,
+    },
+  };
 
-    if (!response.ok) {
-      return {
-        error: true,
-        message: data.message || "Gagal melakukan subscribe",
-      };
-    }
+  const response = await fetch(ENDPOINTS.SUBSCRIBE, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
 
-    return {
-      error: false,
-      data: data.data,
-    };
-  } catch (error) {
-    return {
-      error: true,
-      message: error.message || "Terjadi kesalahan jaringan",
-    };
-  }
+  return response.json();
 }
 
 export async function unsubscribePushNotification(endpoint, token) {

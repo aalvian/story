@@ -146,10 +146,17 @@ header {
 #add-button:hover,
 #home-button:hover,
 #login-button:hover,
+#register-button:hover,
 #subscribe-button:hover,
-#register-button:hover {
+#unsubscribe-button:hover {
   background-color: #e0e8ff;
   box-shadow: 0 2px 4px rgba(16, 16, 65, 0.1);
+}
+
+#login-button,
+#register-button {
+  text-decoration: underline;
+  color: #101041;
 }
 
 #logout-button {
@@ -159,7 +166,7 @@ header {
   padding: 8px 16px;
   background-color: #b30000;
   color: white;
-  border: none;
+  border: 2px solid #b30000;
   border-radius: 10px;
   cursor: pointer;
   font-size: 14px;
@@ -169,6 +176,22 @@ header {
 #logout-button:hover {
   background-color: #d32f2f;
   box-shadow: 0 2px 4px rgba(16, 16, 65, 0.1);
+}
+
+.unsubscribe-button,
+.subscribe-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  color: #101041;
+  background-color: #fff;
+
+  border: 2px solid #101041;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
 /* SKIP TO CONTENT */
