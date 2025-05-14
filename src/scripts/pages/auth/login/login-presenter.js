@@ -14,7 +14,6 @@ class LoginPresenter {
       return;
     }
 
-
     try {
       const { error, loginResult } = await login({ email, password });
 

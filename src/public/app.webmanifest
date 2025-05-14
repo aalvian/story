@@ -19,29 +19,31 @@
       "type": "image/png"
     }
   ],
-    "shortcuts": [
+  "shortcuts": [
     {
       "name": "Tambah Cerita",
       "short_name": "Tambah",
       "description": "Membuat cerita baru",
-      "url": "/#/add",            
-      "icons": [{ 
-        "src": "images/icons/icon-512x512.png", 
-        "sizes": "512x512", 
-        "type": "image/png" 
-      }]
+      "url": "/#/add",
+      "icons": [
+        {
+          "src": "images/icons/icon-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        }
+      ]
     }
   ],
   "screenshots": [
     {
       "src": "images/screenshots/desktop.png",
-      "sizes": "1280x720",        
+      "sizes": "1440x720",
       "type": "image/png",
       "platform": "wide"
     },
     {
       "src": "images/screenshots/mobile.png",
-      "sizes": "375x565",          
+      "sizes": "375x667",
       "type": "image/png",
       "platform": "narrow"
     }

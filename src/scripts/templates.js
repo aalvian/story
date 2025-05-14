@@ -14,6 +14,11 @@ export function generateSubscribeButtonTemplate(isSubscribed = false) {
 
 export function generateAuthenticatedNavigationListTemplate() {
   return `
+        <li>
+        <a href="#/" id="home-button">
+          <i class="fas fa-home"></i> Dashboard
+        </a>
+      </li>
       <li>
         <a href="#/add" id="add-button">
           <i class="fas fa-plus-circle"></i> Tambah Cerita
